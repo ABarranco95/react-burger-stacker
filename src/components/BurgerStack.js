@@ -1,17 +1,18 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react'
 
-class BurgerStack extends Component {
-
-
+export default class BurgerStack extends Component{
     render() {
-        return (
-            <div class='right'>
-                <h1>
-                    Hello from the right aka Burger Stack!
-                </h1>
-            </div>
+        const burgerChoice = this.props.burgerItem.map((eachItem, ind) => {
+            return <div>
+                    <li key={ind}>{eachItem.name}</li>
+                    </div>
+        })
+        return(
+        <div class='right'>
+            <h1>Burger</h1>
+            {burgerChoice}
+            <button onClick={() =>this.props.removeFromBurger()}>Clear the Burger Board</button>
+        </div>
         )
     }
 }
-
-export default BurgerStack;

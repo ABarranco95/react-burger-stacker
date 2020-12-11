@@ -3,9 +3,9 @@ import { Component, React } from 'react';
 import BurgerStack from './components/BurgerStack';
 import Ingredients from './components/Ingredients';
 
-class App extends Component() {
+class App extends Component {
   constructor(props) {
-    super()
+    super(props);
     this.state = {
       ingredients: [
         {name: 'Kaiser Bun', color: 'saddlebrown'},
@@ -21,16 +21,34 @@ class App extends Component() {
         {name: 'Bacon', color: 'maroon'},
         {name: 'Onion', color: 'lightyellow'}
       ],
-      burger: []
+      burgerItems: []
     }
   }
+
+  moveToBurger = (item) => {
+    const burgerItem = [...this.state.burgerItems]
+    burgerItem.push(item)
+    this.setState({burgerItems: burgerItem})
+  }
+
+  removeFromBurger = (item) => {
+    this.setState({
+      burgerItems: []
+    })
+  }
+
+
   render() {
     return (
-      <div className="App">
-        <Ingredients ingredients={this.state.ingredients}/>
-        <BurgerStack />
+    <div className="App">
+      <div className="left">
+        <Ingredients ingredients={this.state.ingredients} moveToBurger={this.moveToBurger}/>
       </div>
-    );
+      <div className="right">
+        <BurgerStack burgerItem={this.state.burgerItems} removeFromBurger={this.removeFromBurger} />
+      </div>
+    </div>
+  );
   }
 }
 
